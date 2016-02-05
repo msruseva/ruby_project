@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160205161358) do
+ActiveRecord::Schema.define(version: 20160205193842) do
+
+  create_table "children", force: :cascade do |t|
+    t.integer "child_id"
+    t.string  "first_name"
+    t.string  "second_name"
+    t.string  "last_name"
+    t.string  "district"
+    t.string  "group"
+    t.string  "orphan"
+    t.string  "half_orphan"
+    t.string  "parent_in_system"
+    t.string  "first_wish"
+    t.string  "second_wish"
+    t.string  "third_wish"
+    t.string  "forth_wish"
+    t.string  "fifth_wish"
+  end
 
   create_table "parents", force: :cascade do |t|
-    t.integer "user_id"
     t.integer "mother_id"
     t.string  "mother_first_name"
     t.string  "mother_second_name"

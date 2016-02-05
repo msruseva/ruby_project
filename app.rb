@@ -4,6 +4,7 @@ require 'pony'
 require './config/environments' #database configuration
 require './users/user'
 require './parents/parent'
+require './children/child'
 #require 'sinatra/reloader' if development?
 
 enable :sessions
@@ -85,14 +86,11 @@ post '/change_password' do
   end
 end
 
-post '/apply_parents' do
+post '/apply' do
   @parent = Parent.new(params[:parent])
-  @parent.save
-  session[:id] = @parent.user_id
+  @child = Child.new(params[:child])
+  @parent.save and @child.save
+  #session[:id] = @parent.user_id
   "Вашата регистрация беше извършена успешно."
 end
 
-post '/apply_children' do
-  @child = Child.new(params[:child]).save
-
-end
