@@ -1,0 +1,9 @@
+.field {
+	font-weight: bold;
+	width: 130px;
+	float: left;
+}
+
+p {
+	margin-bottom: 3px;
+}

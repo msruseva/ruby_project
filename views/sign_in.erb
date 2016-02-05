@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <h3>Регистрация в системата</h3>
+
+    <form action="/sign_in/submit" method="POST">
+      <p>
+        <label>Е-поща:</label>
+        <input type="email" name="user[email]" required />
+      </p>
+      <p>
+        <label>Потребител:</label>
+        <input type="text" name="user[name]" required />
+      </p>
+      <p>
+        <label>Парола:</label>
+        <input type="password" name="user[password]" required />
+      </p>
+      <input type="submit" value="Регистрирай ме" />
+    </form>
+  </body>
+</html>

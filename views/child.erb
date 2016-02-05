@@ -1,0 +1,63 @@
+<p>
+						<label class="subtitle">Данни за детето</label>
+					</p>
+					<p>
+						<label class="names">Дете 1:</label>
+					</p>
+					<p>
+						<label class="field">ЕГН:</label>
+						<input type="tel" name="child_id" required/>
+					</p>
+					<p>
+						<label class="field">Име:</label>
+							<input type="text" name="child_first_name" required/>
+					</p>
+					<p>
+						<label class="field">Презиме:</label>
+							<input type="text" name="child_second_name" required/>
+					</p>
+					<p>
+						<label class="field">Фамилия:</label>
+							<input type="text" name="child_last_name" required/>
+					</p>
+					
+					<input type="submit" value="Добави дете" />
+				</form>
+
+				<form action="/home_page">
+					<p>
+						<label class="option">Район на местоживеене:</label>
+						<select name="district_options">
+				    	<% options_district.each do |key, value| %>
+				     		<option value= '<%= key %>'><%= value %></option>
+				      	<% end %>
+						</select>
+					</p>
+					<p class="group_option" required>
+						<label>Има ли удостоверение за завършена подготвителна група</label>
+							<input type="checkbox" name="group" value="Да">
+					</p>
+					<p class="without_parent_option" required>
+							<label>Сирак</label>
+								<input type="checkbox" name="group" value="Да">
+					</p>
+					<p>
+						<label>Полусирак</label>
+							<input type="checkbox" name="group" value="Да">
+					</p>
+					<p class="education_system_option" required>
+							<label>Работи родител в системата на столичното образование:</label>
+								<input type="checkbox" name="group" value="Да">
+					</p>
+					<p>
+						<select>
+							<% options.each do |key, value| 
+									value.each do |v| %>
+					     		<option value= '<%= key %>'><%= v %></option>
+					     		<% end
+					     	end %>
+							%>
+						</select>
+					</p>
+					<input type="submit" value="Запиши"/>
+				</form>

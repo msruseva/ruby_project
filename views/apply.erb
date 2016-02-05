@@ -1,0 +1,198 @@
+<html>
+<head>
+	<title></title>
+	<link href="/style.sass" rel="stylesheet" type="text/css" />
+	<link href="/apply.css" rel="stylesheet" type="text/css" />
+</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<p>
+					<label class="title">Форма за кандидатстване</label>
+				</p>
+			</div>
+
+			<div id="contant">
+				<form action="/apply_parents" method="POST">
+					<p>
+						<label class="subtitle">Данни за родителите</label>
+					</p>
+					<p>
+						<label class="names">Родител 1:</label>
+					</p>
+					<p>
+						<label class="field">ЕГН:</label>
+						<input type="tel" name="parent[mother_id]" required/>
+					</p>
+					<p>
+						<label class="field">Име:</label>
+							<input type="text" name="parent[mother_first_name]" required/>
+					</p>
+					<p>
+						<label class="field">Презиме:</label>
+							<input type="text" name="parent[mother_second_name]" required/>
+					</p>
+					<p>
+						<label class="field">Фамилия:</label>
+							<input type="text" name="parent[mother_last_name]" required/>
+					</p>
+					<p>
+						<label class="option">Родител 2:</label>
+					</p>
+					<p>
+						<label class="field">ЕГН:</label>
+						<input type="tel" name="parent[father_id]"/>
+					</p>
+					<p>
+						<label class="field">Име:</label>
+							<input type="text" name="parent[father_first_name]"/>
+					</p>
+					<p>
+						<label class="field">Презиме:</label>
+							<input type="text" name="parent[father_second_name]"/>
+					</p>
+					<p>
+						<label class="field">Фамилия:</label>
+							<input type="text" name="parent[father_last_name]"/>
+					</p>
+				
+					<label class="option">Район на месторабота:</label>
+						<select name="district_work" onchange="this.form.submit()">
+				      <%
+				      	options_district = {
+				      		0 => 'Възраждане',
+				      		1 => 'Изгрев',
+				      		2 => 'Илинден',
+				   				3 => 'Красна поляна',
+				   				4 => 'Красно село', 
+		      				5 => 'Лозенец',
+				      		6 => 'Люлин',
+				      		7 => 'Младост1',
+				   				8 => 'Надежда',
+				   				9 => 'Оборище',
+		      				10 => 'Подуяне',
+				      		11 => 'Сердика',
+				      		12 => 'Слатина',
+				   				13 => 'Средец',
+				   				14 => 'Студентски',
+		      				15 => 'Триадица'
+			    			}
+
+				      	options_district.each do |key, value| %>
+				      		<option value= '<%= key %>'><%= value %></option>
+				      	<% end %>
+						</select>
+					<p>
+						<label class="option">Име на училището в което е учил родител 1:</label>
+						<select name="mother_school" onchange="this.form.submit()">
+							<%
+								options = {
+									0 => ["32 СOУ 'Св.Кл.Охридски'", "30 СОУ 'Братя Миладинови'", "18 СОУ 'Уйлям Гладстоун'", "134 СОУ 'Д. Дебелянов'", "13 СОУ 'Kирил и Методий'", "136 ОУ 'Любен Kаравелов'", "67 ОУ 'Васил Друмев'", "76 ОУ 'Уйлям Сароян'"],
+									1 => ["119 СОУ 'Акад. Михаил Арнаудов'", "105 СОУ 'Атанас Далчев'", "11 ОУ 'Св. Пимен Зографски'"],
+									2 => ["43 ОУ 'Христо Смирненски'", "45 ОУ 'Константин Величков'","3 СОУ 'Марин Дринов'", "113 СОУ 'Сава Филаретов'"],
+									3 => ["75 ОУ 'Тодор Каблешков'", "92 ОУ 'Димитър Талев'", "147 ОУ 'Йордан Радичков'"],
+									4 => ["25 ОУ 'Д-р Петър Берон'", "34 ОУ 'Стою Шишков'", "36 СОУ 'Максим Горки'"],
+									5 => ["139 ОУ 'Захарий Круша'", "120 ОУ 'Г.Ст.Раковски'", "122 ОУ 'Николай Лилиев'", "200 ОУ 'Отец Паисий'", "201 ОУ 'Св.Св. Кирил и Методий'"],
+									6 => ["37 СОУ 'Райна Княгиня'", "40 СОУ 'Луи Пастьор'", "56 СОУ 'Проф. Константин Иречек'", "79 СОУ 'Индира Ганди'", "27 СОУ 'Акад. Г. Караславов'", "33 ОУ 'Санкт-Петербург'", "90 СОУ 'Ген. Хосе де Сан Мартин'", "97 СОУ 'Братя Миладинови'", "96 СОУ с изучаване на чужди езици 'Лев Толстой'", "137 СОУ 'Ангел Кънчев'"],
+									7 => ["125 СОУ 'Проф. Боян Пенев' с Изучаване на Чужди Езици", "118 СОУ 'Академик Людмил Стоянов'", "145 СОУ 'Симеон Радев'"],
+									8 => ["16 ОУ'Райко Жинзифов'", "63 ОУ 'Христо Ботев'", "101 СОУ 'Бачо Киро'", "54 СОУ 'Иван Рилски'", "15 СОУ 'Адам Мицкевич'", "102 ОУ 'Панайот Волов'"],
+									9 => ["112 ОУ 'Стоян Заимов'", "129 ОУ 'Антим-I'", "1 СОУ Пенчо Славейков"],
+									10 => ["49 ОУ 'Бенито Хуарес'", "23 СОУ 'Фредерик Жолио-Кюри'", "129 ОУ 'Антим -І'"], 
+									11 => ["100 ОУ 'Найден Геров'", "48 ОУ 'Йосиф Ковачев'", "59 СОУ 'Васил Левски'", "14 СОУ 'Проф. Д-р Асен Златаров'", "29 СОУ 'Кузман Шапкаров'", "60 ОУ 'Св. Св. Кирил и Методий'", "58 ОУ 'Сергей Румянцев'"],
+									12 => ["109 ОУ 'Христо Смирненски'", "148 ОУ 'Професор Д-Р Любомир Милетич'"],
+									13 => ["6 ОУ 'Граф Н. П. Игнатиев'", "38 ОУ 'Васил Априлов'", "7 СОУ 'Св. Седмочисленици'", "12 СОУ 'Цар Иван Асен II'", "127 СОУ 'Иван Денкоглу", "133 СОУ 'Ал. С. Пушкин"],
+									14 => ["8 СОУ 'Васил Левски'", "55 СОУ 'Петко Каравелов'"],
+									15 => ["22 СОУ 'Г.С.Раковски'", "41 ОУ 'Св.Патриарх Евтимий'", "20 ОУ 'Тодор Минков'", "104 ОУ 'Захари Стоянов'", "126 ОУ 'П.Ю.Тодоров'", "47 СОУ 'Христо Г.Данов'", "73 СОУ с изучаване на чужди езици 'Владислав Граматик'", "121 СОУ 'Георги Измирлиев'"]
+								}
+
+								options.each do |key, value| 
+									value.each do |v| %>
+				      		<option value= '<%= key %>'><%= v %></option>
+				      		<% end
+				      	end %>
+							%>
+						</select>
+					</p>
+					<p>
+						<label class="option">Име на училище в което е учил родител 2:</label>
+						<select name="father_school" onchange="this.form.submit()">
+							<% options.each do |key, value| 
+									value.each do |v| %>
+				      		<option value= '<%= key %>'><%= v %></option>
+				      		<% end
+				      	end %>
+							%>
+						</select>
+					</p>
+					<noscript><input type="submit" value="Submit"></noscript>
+					<input type="submit" value="Запиши"/>
+				</form>
+				
+				<!--
+				<form action="/apply_children" method="POST">
+					<p>
+						<label class="subtitle">Данни за детето</label>
+					</p>
+					<p>
+						<label class="names">Дете 1:</label>
+					</p>
+					<p>
+						<label class="field">ЕГН:</label>
+						<input type="tel" name="child[child_id]" required/>
+					</p>
+					<p>
+						<label class="field">Име:</label>
+							<input type="text" name="child[child_first_name]" required/>
+					</p>
+					<p>
+						<label class="field">Презиме:</label>
+							<input type="text" name="child[child_second_name]" required/>
+					</p>
+					<p>
+						<label class="field">Фамилия:</label>
+							<input type="text" name="child[child_last_name]" required/>
+					</p>
+					
+					<input type="submit" value="Добави дете" />
+
+					<p>
+						<label class="option">Район на местоживеене:</label>
+						<select name="district_options">
+				    	<% options_district.each do |key, value| %>
+				     		<option value= '<%= key %>'><%= value %></option>
+				      	<% end %>
+						</select>
+					</p>
+					<p class="group_option" required>
+						<label>Има ли удостоверение за завършена подготвителна група</label>
+							<input type="checkbox" name="group" value="Да">
+					</p>
+					<p class="without_parent_option" required>
+							<label>Сирак</label>
+								<input type="checkbox" name="group" value="Да">
+					</p>
+					<p>
+						<label>Полусирак</label>
+							<input type="checkbox" name="group" value="Да">
+					</p>
+					<p class="education_system_option" required>
+							<label>Работи родител в системата на столичното образование:</label>
+								<input type="checkbox" name="group" value="Да">
+					</p>
+					<p>
+						<select>
+							<% options.each do |key, value| 
+									value.each do |v| %>
+					     		<option value= '<%= key %>'><%= v %></option>
+					     		<% end
+					     	end %>
+							%>
+						</select>
+					</p>
+					<input type="submit" value="Запиши"/>
+				</form>
+				-->
+			</div>
+		</div>
+	</body>
+</html>

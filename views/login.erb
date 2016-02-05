@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <h3>Вход в системата</h3>
+
+    <form action="/login/submit" method="POST">
+      <p>
+        <label>Е-поща:</label>
+        <input type="email" name="email" required/></br>
+      </p>
+      <p>
+        <label>Парола:</label>
+        <input type="password" name="password" required/></br>
+      </p>
+      <input type="submit" value="Вход" />
+    </form>
+
+    <form action="/forgotten_password" method="GET">
+      <input type="submit" value="Забравена парола"></button>
+    </form>
+
+    <form action="/change_password" method="GET">
+      <input type="submit" value="Смяна на паролата"></button>
+    </form>
+
+    <form action="/sign_in" method="GET">
+      <input type="submit" value="Нова регистрация"></button>
+    </form>
+  </body>
+</html>
