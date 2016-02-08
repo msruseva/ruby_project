@@ -1,19 +1,18 @@
 <html>
 <head>
 	<title></title>
-	<link href="/style.sass" rel="stylesheet" type="text/css" />
+	<link href="/style.css" rel="stylesheet" type="text/css" />
 	<link href="/apply.css" rel="stylesheet" type="text/css" />
 </head>
 	<body>
 		<div id="container">
-			<div id="header">
-				<p>
-					<label class="title">Форма за кандидатстване</label>
-				</p>
-			</div>
+			
+			<%= erb :header %>
+
+			<p><label class="title">Форма за кандидатстване</label></p>
 
 			<div id="contant">
-				<form action="/apply" method="POST">
+				<form onsubmit="return true;" action="/apply" method="POST">
 					<p>
 						<label class="subtitle">Данни за родителите</label>
 					</p>
@@ -57,36 +56,22 @@
 					</p>
 				
 					<label class="option">Район на месторабота:</label>
-						<select id="district_work" name="parent[district_work]">
+						<select name="parent[district_work]">
+							<option selected></option>
 				      <%
-				      	options_district = {
-				      		0 => 'Възраждане',
-				      		1 => 'Изгрев',
-				      		2 => 'Илинден',
-				   				3 => 'Красна поляна',
-				   				4 => 'Красно село', 
-		      				5 => 'Лозенец',
-				      		6 => 'Люлин',
-				      		7 => 'Младост1',
-				   				8 => 'Надежда',
-				   				9 => 'Оборище',
-		      				10 => 'Подуяне',
-				      		11 => 'Сердика',
-				      		12 => 'Слатина',
-				   				13 => 'Средец',
-				   				14 => 'Студентски',
-		      				15 => 'Триадица'
-			    			}
-
-				      	options_district.each do |key, value| %>
-				      		<option value= '<%= value %>'><%= value %></option>
-				      	<% end %>
+								districts = ['Възраждане','Изгрев', 'Илинден','Красна поляна','Красно село', 'Лозенец', 'Люлин', 'Младост1', 'Надежда', 'Оборище', 'Подуяне', 'Сердика', 'Слатина', 'Средец', 'Студентски', 'Триадица']
+								
+								districts.each do |value| %>
+									<option value= '%=value'><%= value%></option>
+								<% end %>
+							%>
 						</select>
 					<p>
 						<label class="option">Име на училището в което е учил родител 1:</label>
-						<select id="mother_school" name="parent[mother_school]">
+						<select name="parent[mother_school]">
+							<option selected></option>
 							<%
-								options = {
+								schools = {
 									'Възраждане' => ["32 СOУ Св.Кл.Охридски", "30 СОУ Братя Миладинови", "18 СОУ Уйлям Гладстоун", "134 СОУ Д. Дебелянов", "13 СОУ Kирил и Методий", "136 ОУ Любен Kаравелов", "67 ОУ Васил Друмев", "76 ОУ Уйлям Сароян"],
 									'Изгрев' => ["119 СОУ Акад. Михаил Арнаудов", "105 СОУ Атанас Далчев", "11 ОУ Св. Пимен Зографски"],
 									'Илинден' => ["43 ОУ Христо Смирненски", "45 ОУ Константин Величков", "3 СОУ Марин Дринов", "113 СОУ Сава Филаретов"],
@@ -105,7 +90,7 @@
 									'Триадица' => ["22 СОУ Г.С.Раковски", "41 ОУ Св.Патриарх Евтимий", "20 ОУ Тодор Минков", "104 ОУ Захари Стоянов", "126 ОУ П.Ю.Тодоров", "47 СОУ Христо Г.Данов", "73 СОУ с изучаване на чужди езици Владислав Граматик", "121 СОУ Георги Измирлиев"]
 								}
 								
-								options.each do |key, value|
+								schools.each do |key, value|
 									value.each do |v| %>
 										<option value= '<%= v %>'><%= v %></option>
 				      		<% end
@@ -115,8 +100,9 @@
 					</p>
 					<p>
 						<label class="option">Име на училище в което е учил родител 2:</label>
-						<select id="father_school" name="parent[father_school]">
-							<% options.each do |key, value| 
+						<select name="parent[father_school]">
+							<option selected></option>
+							<% schools.each do |key, value| 
 									value.each do |v| %>
 				      		<option value= '<%= v %>'><%= v %></option>
 				      		<% end
@@ -147,12 +133,14 @@
 							<input type="text" name="child[last_name]" required/>
 					</p>
 					
-					<input type="submit" value="Добави дете" />
+					<form action='/more_children_apply'>
+						<input type="submit" value="Добави дете" />
+					</form>
 
 					<p>
 						<label class="option">Район на местоживеене:</label>
 						<select name="child[district]">
-				    	<% options_district.each do |key, value| %>
+				    	<% districts.each do |value| %>
 				     		<option value= '<%= value %>'><%= value %></option>
 				      	<% end %>
 						</select>
@@ -179,70 +167,43 @@
 					</p>
 					<p>
 						<label>Подредете 5 желани от вас училища</label></br>
-						<!--
-						<% 1.upto(5) { %>
-							<select id="father_school" name="parent[first_wish]">
-								<% 
-									options.each do |key, value| 
-											value.each do |v| %>
-							     		1. <option value= '<%= v %>'><%= v %></option>
-							     		<% end
-						     	end
-								%>
-							</select>
-							<%}
+						<%
+							def school(schools) %>
+								<option selected></option>
+								<%
+								schools.each do |key, value|
+									value.each do |v| %>
+							    	<option value= '<%= v %>'><%= v %></option>
+							    <% end
+								end
+							end
 						%>
-						-->
+
 						<b>1.</b>
 						<select name="child[first_wish]">
-								<% 
-									options.each do |key, value| 
-										value.each do |v| %>
-							     		<option value= '<%= v %>'><%= v %></option>
-							     	<% end
-						     	end
-								%>
+							<%= school(schools)%>
 						</select></br>
+						
 						<b>2.</b>
 						<select name="child[second_wish]">
-								<% 
-									options.each do |key, value| 
-										value.each do |v| %>
-							     		<option value= '<%= v %>'><%= v %></option>
-							     	<% end
-						     	end
-								%>
+							<%= school(schools)%>
 						</select></br>
+						
 						<b>3.</b>
 						<select name="child[third_wish]">
-								<% 
-									options.each do |key, value| 
-										value.each do |v| %>
-							     		<option value= '<%= v %>'><%= v %></option>
-							     	<% end
-						     	end
-								%>
+							<%= school(schools)%>
 						</select></br>
+
 						<b>4.</b>
 						<select name="child[forth_wish]">
-								<% 
-									options.each do |key, value| 
-										value.each do |v| %>
-							     		<option value= '<%= v %>'><%= v %></option>
-							     	<% end
-						     	end
-								%>
+							<%= school(schools)%>
 						</select></br>
+
 						<b>5.</b>
 						<select name="child[fifth_wish]">
-								<% 
-									options.each do |key, value| 
-										value.each do |v| %>
-							     		<option value= '<%= v %>'><%= v %></option>
-							     	<% end
-						     	end
-								%>
+							<%= school(schools)%>
 						</select>
+						
 					</p>
 					<input type="submit" value="Запиши"/>
 				</form>

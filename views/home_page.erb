@@ -1,33 +1,12 @@
 <html>
   <head>
     <title>Home page</title>
-    <link href="/style.sass" rel="stylesheet" type="text/css" />
+    <link href="/home_page.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div id="container">
-      <div id="header">
-        <center><h3>Hello <%= session[:name] %></h3></center>
-
-        <form class="button" action="/home_page">
-          <input type="submit" value="Начало">
-        </form>
-
-        <form class="button" action="/rules">
-          <input type="submit" value="Ръководство">
-        </form>
-
-        <form class="button" action="/apply">
-          <input type="submit" value="Кандидатстване">
-        </form>
-
-        <form class="button" action="/place">
-          <input type="submit" value="Класиране">
-        </form>
-
-        <form class="button" action="/logout" method="GET">
-          <input type="submit" value="Изход">
-        </form>
-      </div>
+      <center><h3>Hello <%= session[:name] %></h3></center>
+      <%= erb :header %>
 
       <div id="content">
       </div>

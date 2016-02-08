@@ -5,11 +5,11 @@ require './config/environments' #database configuration
 require './users/user'
 require './parents/parent'
 require './children/child'
-#require 'sinatra/reloader' if development?
 
-enable :sessions
+enable :sessions unless test?
 
 get '/' do
+  session[:id] = nil
   erb :index
 end
 
@@ -26,7 +26,7 @@ get '/forgotten_password' do
 end
 
 get '/logout' do
-  session['id'] = nil
+  session[:id] = nil
   redirect '/'
 end
 
@@ -39,7 +39,11 @@ get '/rules' do
 end
 
 get '/apply' do
-  erb :apply
+  if session[:id] == nil
+    redirect '/login'
+  else
+    erb :apply
+  end
 end
 
 post '/sign_in/submit' do
@@ -73,17 +77,6 @@ post '/forgotten_password' do
     :body => "Новата ви парола е: #{random_password}. При удобен за вас момент я сменете за повишаване на вашата сигурност."
   )
   "Вашата нова парола беше изпратена на подадената от вас Е-поща."
-end
-
-post '/change_password' do
-  @user = User.find_by_email(params[:email])
-  if @user and @user.password == params[:password]
-    session[:id] = @user.id
-    session[:password] = @user.new_password
-    redirect '/login'
-  else
-    "Неуспешна смяна на паролата. Опитайте отново."
-  end
 end
 
 post '/apply' do

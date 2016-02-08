@@ -71,6 +71,7 @@ DEPENDENCIES
   bcrypt
   pg
   pony
+  rack-test
   rake
   sinatra
   sinatra-activerecord

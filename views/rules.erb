@@ -1,13 +1,13 @@
 <html>
 <head>
 	<title></title>
-	<link href="/style.sass" rel="stylesheet" type="text/css" />
+	<link href="/style.css" rel="stylesheet" type="text/css" />
 </head>
 	<body>
 		<div id="container">
-			<div id="header">
-				<p class="title"><b>Ръководство за кандидатстване</b></p>
-			</div>
+			<%= erb :header %>
+			
+			<p class="title"><b>Ръководство за кандидатстване</b></p>
 
 			<div id="content">
 					<p class="subtitle"><b>Въведение</b></p>
@@ -49,12 +49,6 @@
 							5. Ако детето има родител в системата на образованието в съответното училище - 1т.
 						</span>
 					</p>
-			</div>
-
-			<div id="footer">
-				<form class="button" action="/home_page">
-          <input type="submit" value="Начало">
-        </form>
 			</div>
 		</div>
 	</body>

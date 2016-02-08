@@ -1,27 +1,11 @@
 <html>
   <head>
     <title>Home page</title>
-    <link href="/style.sass" rel="stylesheet" type="text/css" />
+    <link href="/home_page.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div id="container">
-    	<div id="header">
-        <form class="button" action="/">
-          <input type="submit" value="Начало">
-        </form>
-
-        <form class="button" action="/login">
-          <input type="submit" value="Вход">
-        </form>
-
-    		<form class="button" action="/rules">
-          <input type="submit" value="Ръководство">
-        </form>
-
-        <form class="button" action="/">
-          <input type="submit" value="Класиране">
-        </form>
-    	</div>
+    	<%= erb :header %>
 
       <div id="content">
       </div>

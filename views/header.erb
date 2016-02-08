@@ -1,0 +1,40 @@
+<div id="header">
+	<% if session[:id] == nil %>
+	  <form class="button" action="/home_page">
+      <input type="submit" value="Начало">
+    </form>
+
+    <form class="button" action="/rules">
+      <input type="submit" value="Ръководство">
+    </form>
+
+    <form class="button" action="/place">
+      <input type="submit" value="Класиране">
+    </form>
+
+    <form class="button" action="/login">
+      <input type="submit" value="Вход">
+    </form>
+	<% else %>
+		<form class="button" action="/home_page">
+      <input type="submit" value="Начало">
+    </form>
+
+    <form class="button" action="/rules">
+      <input type="submit" value="Ръководство">
+    </form>
+
+    <form class="button" action="/apply">
+      <input type="submit" value="Кандидатстване">
+    </form>
+
+    <form class="button" action="/place">
+      <input type="submit" value="Класиране">
+    </form>
+
+    <form class="button" action="/logout">
+      <input type="submit" value="Изход">
+    </form>
+	  <% end
+	%>
+</div>

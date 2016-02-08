@@ -7,6 +7,9 @@ gem "sinatra-flash"
 gem "sinatra-redirect-with-flash"
 gem "rake"
 
+# tests
+gem "rack-test"
+
 # password encryption
 gem "bcrypt"
 
