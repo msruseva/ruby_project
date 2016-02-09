@@ -3,6 +3,9 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   include BCrypt
 
+  has_many :children
+  has_many :parents
+
   def password
     Password.new(read_attribute :password)
   end

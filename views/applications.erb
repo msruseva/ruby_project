@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title></title>
+	<link href="/style.css" rel="stylesheet" type="text/css" />
+	<link href="/apply.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		function run(){
+			document.getElementById("@child.district_first_wish").value = document.getElementById("a").value;
+		}
+	</script>
+</head>
+	<body>
+		<div id="container">
+			
+			<%= erb :header %>
+
+			<table>
+			<thead>
+			<tr>
+				<th>Дете</th>
+				<th>Дата</th>
+				<th>Район</th>
+				<th>Училище</th>
+				<th>Пореден номер</th>
+				<th>&nbsp;</th>
+			</tr>
+			</thead>
+			<tbody>
+				<% @applications.each do |app| %>
+				<tr>
+					<td><%= app.child.to_s %></td>
+					<td><%= app.created_at %></td>
+					<td><%= app.school.district.name %></td>
+					<td><%= app.school.name %></td>
+					<td><%= app.num %></td>
+					<td><a href="/application/<%= app.id %>">редакция</a></td>
+				</tr>
+				<% end %>
+			</tbody>
+			</table>
+
+			<a href="/applications/new">Добавяне на кандидатура</a>
+		</div>
+	</body>
+</html>

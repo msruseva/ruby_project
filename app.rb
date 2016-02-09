@@ -2,9 +2,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'pony'
 require './config/environments' #database configuration
-require './users/user'
-require './parents/parent'
-require './children/child'
+Dir["./models/*.rb"].each {|file| require file }
 
 enable :sessions unless test?
 
@@ -42,7 +40,33 @@ get '/apply' do
   if session[:id] == nil
     redirect '/login'
   else
+    @parent = Parent.new
+    @child = Child.new
     erb :apply
+  end
+end
+
+get '/applications' do
+  @applications = Application.includes(:child)
+    .where(children: {user_id: session[:id]})
+    .order("children.first_name, children.last_name, applications.created_at")
+  erb :applications
+end
+
+get '/applications/new' do
+  @user = User.find(session[:id])
+  @application = Application.new
+  erb :application
+end
+
+post '/applications' do
+  @user = User.find(session[:id])
+  @application = Application.new(params[:application])
+  if @application.save
+    session[:flash] = "Кандидатурата беше добавена успешно"
+    redirect '/applications'
+  else
+    erb :application
   end
 end
 
@@ -81,9 +105,16 @@ end
 
 post '/apply' do
   @parent = Parent.new(params[:parent])
+  @parent.user_id = session[:id]
   @child = Child.new(params[:child])
-  @parent.save and @child.save
-  #session[:id] = @parent.user_id
-  "Вашата регистрация беше извършена успешно."
+  @child.user_id = session[:id]
+  @child.parent = @parent
+  if @parent.valid? and @child.valid?
+    @parent.save
+    @child.save
+    "Вашата регистрация беше извършена успешно."
+  else
+    erb :apply
+  end
 end
 
