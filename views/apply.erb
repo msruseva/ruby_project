@@ -3,6 +3,11 @@
 	<title></title>
 	<link href="/style.css" rel="stylesheet" type="text/css" />
 	<link href="/apply.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		function run(){
+			document.getElementById("@child.district_first_wish").value = document.getElementById("a").value;
+		}
+	</script>
 </head>
 	<body>
 		<div id="container">
@@ -12,7 +17,7 @@
 			<p><label class="title">Форма за кандидатстване</label></p>
 
 			<div id="contant">
-				<form onsubmit="return true;" action="/apply" method="POST">
+				<form action="/apply" method="POST">
 					<p>
 						<label class="subtitle">Данни за родителите</label>
 					</p>
@@ -133,13 +138,12 @@
 							<input type="text" name="child[last_name]" required/>
 					</p>
 					
-					<form action='/more_children_apply'>
-						<input type="submit" value="Добави дете" />
-					</form>
+					<input type="submit" value="Добави дете" />
 
 					<p>
 						<label class="option">Район на местоживеене:</label>
 						<select name="child[district]">
+							<option selected></option>
 				    	<% districts.each do |value| %>
 				     		<option value= '<%= value %>'><%= value %></option>
 				      	<% end %>
@@ -165,46 +169,81 @@
 							Да:<input type="radio" name="child[parent_in_system]" value="Да">
 							Не:<input type="radio" name="child[parent_in_system]" value="Не">
 					</p>
-					<p>
+					
 						<label>Подредете 5 желани от вас училища</label></br>
 						<%
+							def district(districts) %>
+								<option selected></option>
+								<% districts.each do |value| %>
+									<option value='<%= value %>'><%= value%></option>
+							<% end
+							end
+
 							def school(schools) %>
 								<option selected></option>
 								<%
 								schools.each do |key, value|
-									value.each do |v| %>
+									value.each do|v| %>
 							    	<option value= '<%= v %>'><%= v %></option>
-							    <% end
+							    <%
+							  	end
 								end
 							end
 						%>
 
 						<b>1.</b>
+						<label>Район на училището:</label>
+						<select id='a' name="child[district_first_wish]" onchange="run()">
+							<%= district(districts) %>
+						</select>
+						
+						<label>Име на училището:</label>
 						<select name="child[first_wish]">
 							<%= school(schools)%>
 						</select></br>
-						
+						<!--
 						<b>2.</b>
+						<label>Район на училището:</label>
+						<select name="child[district_first_wish]">
+							<%= district(districts) %>
+						</select>
+						
+						<label>Име на училището:</label>
 						<select name="child[second_wish]">
 							<%= school(schools)%>
 						</select></br>
 						
 						<b>3.</b>
+						<label>Район на училището:</label>
+						<select name="child[district_first_wish]">
+							<%= district(districts) %>
+						</select>
+						<label>Име на училището:</label>
 						<select name="child[third_wish]">
 							<%= school(schools)%>
 						</select></br>
 
 						<b>4.</b>
-						<select name="child[forth_wish]">
+						<label>Район на училището:</label>
+						<select name="child[district_first_wish]">
+							<%= district(districts) %>
+						</select>
+						<label>Име на училището:</label>
+						<select name="child[fourth_wish]">
 							<%= school(schools)%>
 						</select></br>
 
 						<b>5.</b>
+						<label>Район на училището:</label>
+						<select name="child[district_first_wish]">
+							<%= district(districts) %>
+						</select>
+						<label>Име на училището:</label>
 						<select name="child[fifth_wish]">
 							<%= school(schools)%>
 						</select>
-						
-					</p>
+						-->
+					
 					<input type="submit" value="Запиши"/>
 				</form>
 			</div>
