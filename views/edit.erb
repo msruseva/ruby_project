@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title></title>
+</head>
+	<body>
+		<form action="/child/<%= @child.id%>"method="POST">	
+			<input type="hidden" name="_method" value="put">
+			<p>
+				<label class="field">ЕГН:</label>
+				<input type="tel" name="child[egn]" value="<%= @child.egn %>" required/>
+			</p>
+			<p>
+				<label class="field">Име:</label>
+				<input type="text" name="child[first_name]" value="<%= @child.first_name %>" required/>
+			</p>
+			<p>
+			<label class="field">Презиме:</label>
+				<input type="text" name="child[second_name]" value="<%= @child.second_name %>" required/>
+			</p>
+			<p>
+				<label class="field">Фамилия:</label>
+					<input type="text" name="child[last_name]" value="<%= @child.last_name %>" required/>
+			</p>
+			<input type="hidden" name="_method" value="put">
+			<input type="submit" value="Редактирай">
+		</form>
+	</body>
+</html>

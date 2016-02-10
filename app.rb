@@ -36,16 +36,6 @@ get '/rules' do
   erb :rules
 end
 
-get '/apply' do
-  if session[:id] == nil
-    redirect '/login'
-  else
-    @parent = Parent.new
-    @child = Child.new
-    erb :apply
-  end
-end
-
 get '/applications' do
   @applications = Application.includes(:child)
     .where(children: {user_id: session[:id]})
@@ -59,15 +49,34 @@ get '/applications/new' do
   erb :application
 end
 
-post '/applications' do
-  @user = User.find(session[:id])
-  @application = Application.new(params[:application])
-  if @application.save
-    session[:flash] = "Кандидатурата беше добавена успешно"
-    redirect '/applications'
+
+get '/parent' do
+  if session[:id] == nil
+    redirect '/login'
   else
-    erb :application
+    @parents = Parent.exists?(user_id: session[:id])
+
+    unless @parents
+      @parent = Parent.new
+      erb :parent
+    else
+      redirect '/child/new'
+    end
   end
+end
+
+get '/child/new' do
+  if session[:id] == nil
+    redirect '/login'
+  else
+    @child = Child.new
+    erb :child
+  end
+end
+
+get '/parents_children' do
+  @children = Child.where(children: {user_id: session[:id]})
+  erb :parents_children
 end
 
 post '/sign_in/submit' do
@@ -94,27 +103,73 @@ post '/forgotten_password' do
   @user = User.find_by_email(params[:email])
   random_password = Array.new(10).map { (65 + rand(58)).chr}.join
   @user.password = random_password
-  @user.save!
+  @user.save
   Pony.mail(
     :to => @user.email,
     :subject => "Нова парола",
-    :body => "Новата ви парола е: #{random_password}. При удобен за вас момент я сменете за повишаване на вашата сигурност."
+    :body => "Новата ви парола е: #{random_password}."
   )
   "Вашата нова парола беше изпратена на подадената от вас Е-поща."
 end
 
-post '/apply' do
+post '/applications' do
+  @user = User.find(session[:id])
+  @application = Application.new(params[:application])
+  if @application.save
+    session[:flash] = "Кандидатурата беше добавена успешно"
+    redirect '/applications'
+  else
+    erb :application
+  end
+end
+
+post '/parents' do
   @parent = Parent.new(params[:parent])
   @parent.user_id = session[:id]
+  if @parent.valid?
+    @parent.save
+    session[:flash] = "Вие успешно добавихте вашите данни."
+    redirect '/child/new'
+  end
+end
+
+post '/children' do
+  @parent = Parent.where(parents: {user_id: session[:id]}).first
   @child = Child.new(params[:child])
   @child.user_id = session[:id]
   @child.parent = @parent
   if @parent.valid? and @child.valid?
-    @parent.save
     @child.save
-    "Вашата регистрация беше извършена успешно."
+    session[:flash] = "Вие успешно добавихте данните на вашия кандидат."
+    redirect '/parents_children'
   else
-    erb :apply
+    erb :child
   end
 end
 
+delete '/child/:id' do
+  @child = Child.find(params[:id])
+  @child.destroy
+  redirect '/parents_children'
+end
+
+delete '/application/:id' do
+  @application = Application.find(params[:id])
+  @application.destroy
+  redirect '/applications'
+end
+
+get '/child/:id' do
+  @child = Child.find(params[:id])
+  erb :edit
+end
+
+put '/child/:id' do
+  @child = Child.find(params[:id])
+  @child.egn = params[:child][:egn]
+  @child.first_name = params[:child][:first_name]
+  @child.second_name = params[:child][:second_name]
+  @child.last_name = params[:child][:last_name]
+  @child.save
+  redirect '/parents_children'
+end

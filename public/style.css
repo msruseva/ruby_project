@@ -10,12 +10,18 @@
 	width: 100%
 }
 
-#content{
+#content_left{
 	float: left;
+	width: 50%;
 	height: 100%;
 }
 
+#content_right{
+	float: right;
+	width: 50%;
+	height: 100%;
+}
 .button{
 	float: left;
-	margin-left: 100px;
+	margin-left: 70px;
 }

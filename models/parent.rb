@@ -4,5 +4,5 @@ class Parent < ActiveRecord::Base
 
   validates :mother_egn, :mother_first_name, :mother_second_name,
     :mother_last_name, :user, presence: true
-  validates :mother_egn, :father_egn, length: { is: 10 }
+  validates :mother_egn, length: { is: 10 }
 end

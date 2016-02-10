@@ -24,8 +24,12 @@
       <input type="submit" value="Ръководство">
     </form>
 
-    <form class="button" action="/apply">
+    <form class="button" action="/parent">
       <input type="submit" value="Кандидатстване">
+    </form>
+
+    <form class="button" action="/parents_children">
+      <input type="submit" value="Деца">
     </form>
 
     <form class="button" action="/applications">
@@ -42,6 +46,7 @@
 	  <% end
 	%>
   <% if session[:flash] %>
+  </br>
   <p class="notice"><%= session[:flash] %></p>
   <% session[:flash] = nil %>
   <% end %>

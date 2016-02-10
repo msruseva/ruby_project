@@ -1,0 +1,67 @@
+<html>
+<head>
+	<title></title>
+	<link href="/style.css" rel="stylesheet" type="text/css" />
+</head>
+	<body>
+		<%= erb :header %>
+		<form action="/children" method="POST">
+		<div class="content_left">
+			<p>
+				<label class="subtitle">Данни за детето</label>
+			</p>
+			<p>
+				<label class="names">Дете 1:</label>
+			</p>
+			<p>
+				<label class="field">ЕГН:</label>
+					<input type="tel" name="child[egn]" value="<%= @child.egn %>" required/>
+			</p>
+			<p>
+				<label class="field">Име:</label>
+					<input type="text" name="child[first_name]" value="<%= @child.first_name %>" required/>
+			</p>
+			<p>
+				<label class="field">Презиме:</label>
+					<input type="text" name="child[second_name]" value="<%= @child.second_name %>" required/>
+			</p>
+			<p>
+				<label class="field">Фамилия:</label>
+					<input type="text" name="child[last_name]" value="<%= @child.last_name %>" required/>
+			</p>
+
+			<p>
+				<label class="option">Район на местоживеене:</label>
+					<select name="child[district_id]">
+							<option selected></option>
+						  <% District.order(:name).each do |district| %>
+								<option value= '<%= district.id %>' <%= @child.district_id == district.id ? 'selected' : '' %>> <%= district.name %></option>
+							<% end %>
+					</select>
+			</p>
+			<p class="group_option" required>
+				<label>Има ли удостоверение за завършена подготвителна група</label></br>
+					Да:<input type="radio" name="child[group]" value="<%= @child.group%>">
+					Не:<input type="radio" name="child[group]" value="<%= @child.group%>">
+			</p>
+			<p class="without_parent_option" required>
+				<label>Сирак</label></br>
+					Да:<input type="radio" name="child[orphan]" value="<%= @child.orphan%>">
+					Не:<input type="radio" name="child[orphan]" value="<%= @child.orphan%>">
+			</p>
+			<p>
+				<label>Полусирак</label></br>
+					Да:<input type="radio" name="child[half_orphan]" value="<%= @child.half_orphan%>">
+					Не:<input type="radio" name="child[half_orphan]" value="<%= @child.half_orphan%>">
+			</p>
+			<p class="education_system_option" required>
+				<label>Работи родител в системата на столичното образование:</label></br>
+					Да:<input type="radio" name="child[parent_in_system]" value="<%= @child.parent_in_system%>">
+					Не:<input type="radio" name="child[parent_in_system]" value="<%= @child.parent_in_system%>">
+			</p>
+
+			<input type="submit" value="Запиши"/>
+			</div>
+		</form>
+	</body>
+</html>

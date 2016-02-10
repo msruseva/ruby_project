@@ -1,0 +1,87 @@
+<html>
+<head>
+	<title></title>
+	<link href="/style.css" rel="stylesheet" type="text/css" />
+	<link href="/apply.css" rel="stylesheet" type="text/css" />
+</head>
+	<body>
+		<div id="container">
+			
+			<%= erb :header %>
+			<p><label class="title">Форма за кандидатстване</label></p>
+			<form action="/parents" method="POST">
+				<div id="content_left">
+					<p>
+						<label class="subtitle">Данни за родителите</label>
+					</p>
+					<p>
+						<label class="names">Родител 1:</label>
+					</p>
+					<p>
+						<label class="field">ЕГН:</label>
+						<input type="tel" name="parent[mother_egn]" value="<%= @parent.mother_egn %>" required/>
+					</p>
+					<p>
+						<label class="field">Име:</label>
+							<input type="text" name="parent[mother_first_name]" value="<%= @parent.mother_first_name %>" required/>
+					</p>
+					<p>
+						<label class="field">Презиме:</label>
+							<input type="text" name="parent[mother_second_name]" value="<%= @parent.mother_second_name %>" required/>
+					</p>
+					<p>
+						<label class="field">Фамилия:</label>
+							<input type="text" name="parent[mother_last_name]" value="<%= @parent.mother_last_name %>" required/>
+					</p>
+					<p>
+						<label class="option">Родител 2:</label>
+					</p>
+					<p>
+						<label class="field">ЕГН:</label>
+						<input type="tel" name="parent[father_egn]" value="<%= @parent.father_egn %>" />
+					</p>
+					<p>
+						<label class="field">Име:</label>
+							<input type="text" name="parent[father_first_name]" value="<%= @parent.father_first_name %>" />
+					</p>
+					<p>
+						<label class="field">Презиме:</label>
+							<input type="text" name="parent[father_second_name]" value="<%= @parent.father_second_name %>" />
+					</p>
+					<p>
+						<label class="field">Фамилия:</label>
+							<input type="text" name="parent[father_last_name]" value="<%= @parent.father_last_name %>" />
+					</p>
+				
+					<label class="option">Район на месторабота:</label>
+						<select name="parent[district_id]">
+							<option selected></option>
+				      <% District.order(:name).each do |district| %>
+							  <option value= '<%= district.id %>' <%= @parent.district_id == district.id ? 'selected' : '' %>><%= district.name %></option>
+							<% end %>
+						</select>
+					<p>
+						<label class="option">Име на училището в което е учил родител 1:</label>
+						<select name="parent[mother_school_id]">
+							<option selected></option>
+							<% School.order(:name).each do |school| %>
+								<option value= '<%= school.id %>'><%= @parent.mother_school_id == school.id ? 'selected' : '' %>><%= school.name %></option>
+				      <% end %>
+						</select>
+					</p>
+					<p>
+						<label class="option">Име на училище в което е учил родител 2:</label>
+						<select name="parent[father_school_id]">
+							<option selected></option>
+							<% School.order(:name).each do |school| %>
+								<option value= '<%= school.id %>'><%= @parent.father_school_id == school.id ? 'selected' : '' %>><%= school.name %></option>
+				      <% end %>
+						</select>
+					</p>
+
+					<input type="submit" value="Запиши"/>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

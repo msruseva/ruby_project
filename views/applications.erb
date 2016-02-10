@@ -2,12 +2,6 @@
 <head>
 	<title></title>
 	<link href="/style.css" rel="stylesheet" type="text/css" />
-	<link href="/apply.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript">
-		function run(){
-			document.getElementById("@child.district_first_wish").value = document.getElementById("a").value;
-		}
-	</script>
 </head>
 	<body>
 		<div id="container">
@@ -19,7 +13,6 @@
 			<tr>
 				<th>Дете</th>
 				<th>Дата</th>
-				<th>Район</th>
 				<th>Училище</th>
 				<th>Пореден номер</th>
 				<th>&nbsp;</th>
@@ -30,10 +23,14 @@
 				<tr>
 					<td><%= app.child.to_s %></td>
 					<td><%= app.created_at %></td>
-					<td><%= app.school.district.name %></td>
 					<td><%= app.school.name %></td>
 					<td><%= app.num %></td>
-					<td><a href="/application/<%= app.id %>">редакция</a></td>
+					<td>
+						<form action="/application/<%= app.id %>" method="POST">
+							<input type="hidden" name="_method" value="delete">
+	    					<input type="submit" value="Изтрий">
+						</form>
+					</td>
 				</tr>
 				<% end %>
 			</tbody>
@@ -43,3 +40,4 @@
 		</div>
 	</body>
 </html>
+
