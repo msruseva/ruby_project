@@ -1,14 +1,16 @@
 <html>
   <head>
     <title>Home page</title>
-    <link href="/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/home_page.css">
   </head>
   <body>
     <div id="container">
-      <center><h3>Hello <%= session[:name] %></h3></center>
       <%= erb :header %>
 
       <div id="content">
+        <div class="title">
+          <h1>Hello <%= session[:name] %></h1>
+        </div>
       </div>
 
     </div>

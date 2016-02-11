@@ -2,6 +2,8 @@ class School < ActiveRecord::Base
   belongs_to :district
   has_many :applications
 
+  PLACES = 130
+
   def self.by_district
     result = {}
     School.order(:name).each do |school|

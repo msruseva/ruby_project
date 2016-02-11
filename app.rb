@@ -2,7 +2,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'pony'
 require './config/environments' #database configuration
-Dir["./models/*.rb"].each {|file| require file }
+Dir["./models/*.rb", "./lib/*.rb"].each {|file| require file }
 
 enable :sessions unless test?
 
@@ -34,49 +34,6 @@ end
 
 get '/rules' do
   erb :rules
-end
-
-get '/applications' do
-  @applications = Application.includes(:child)
-    .where(children: {user_id: session[:id]})
-    .order("children.first_name, children.last_name, applications.created_at")
-  erb :applications
-end
-
-get '/applications/new' do
-  @user = User.find(session[:id])
-  @application = Application.new
-  erb :application
-end
-
-
-get '/parent' do
-  if session[:id] == nil
-    redirect '/login'
-  else
-    @parents = Parent.exists?(user_id: session[:id])
-
-    unless @parents
-      @parent = Parent.new
-      erb :parent
-    else
-      redirect '/child/new'
-    end
-  end
-end
-
-get '/child/new' do
-  if session[:id] == nil
-    redirect '/login'
-  else
-    @child = Child.new
-    erb :child
-  end
-end
-
-get '/parents_children' do
-  @children = Child.where(children: {user_id: session[:id]})
-  erb :parents_children
 end
 
 post '/sign_in/submit' do
@@ -112,14 +69,27 @@ post '/forgotten_password' do
   "Вашата нова парола беше изпратена на подадената от вас Е-поща."
 end
 
-post '/applications' do
-  @user = User.find(session[:id])
-  @application = Application.new(params[:application])
-  if @application.save
-    session[:flash] = "Кандидатурата беше добавена успешно"
-    redirect '/applications'
+get '/parent' do
+  if session[:id] == nil
+    redirect '/login'
   else
-    erb :application
+    @parents = Parent.exists?(user_id: session[:id])
+
+    unless @parents
+      @parent = Parent.new
+      erb :parent
+    else
+      redirect '/child/new'
+    end
+  end
+end
+
+get '/child/new' do
+  if session[:id] == nil
+    redirect '/login'
+  else
+    @child = Child.new
+    erb :child
   end
 end
 
@@ -133,6 +103,11 @@ post '/parents' do
   end
 end
 
+get '/children' do
+  @children = Child.where(children: {user_id: session[:id]})
+  erb :children
+end
+
 post '/children' do
   @parent = Parent.where(parents: {user_id: session[:id]}).first
   @child = Child.new(params[:child])
@@ -141,16 +116,42 @@ post '/children' do
   if @parent.valid? and @child.valid?
     @child.save
     session[:flash] = "Вие успешно добавихте данните на вашия кандидат."
-    redirect '/parents_children'
+    redirect '/children'
   else
     erb :child
   end
 end
 
-delete '/child/:id' do
-  @child = Child.find(params[:id])
-  @child.destroy
-  redirect '/parents_children'
+get '/applications' do
+  @applications = Application.includes(:child)
+    .where(children: {user_id: session[:id]})
+    .order("children.first_name, children.last_name, applications.created_at")
+  erb :applications
+end
+
+get '/applications/new' do
+  @user = User.find(session[:id])
+  @application = Application.new
+  erb :application
+end
+
+post '/applications' do
+  @user = User.find(session[:id])
+  @application = Application.new(params[:application])
+  @child_id = params[:application][:child_id]
+  @app_num = params[:application][:num]
+
+  @new_num = Application.where("applications.child_id = ? AND applications.num = ?", @child_id, @app_num)
+
+  @new_num.each do |app|
+    app.destroy
+  end
+  if @application.save
+    session[:flash] = "Кандидатурата беше добавена успешно"
+    redirect '/applications'
+  else
+    erb :application
+  end
 end
 
 delete '/application/:id' do
@@ -171,5 +172,11 @@ put '/child/:id' do
   @child.second_name = params[:child][:second_name]
   @child.last_name = params[:child][:last_name]
   @child.save
-  redirect '/parents_children'
+  redirect '/children'
+end
+
+delete '/child/:id' do
+  @child = Child.find(params[:id])
+  @child.destroy
+  redirect '/children'
 end

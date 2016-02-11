@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title></title>
+	<link href="/table.css" rel="stylesheet" type="text/css" />
 	<link href="/style.css" rel="stylesheet" type="text/css" />
 </head>
 	<body>
@@ -8,7 +9,7 @@
 			
 			<%= erb :header %>
 
-			<table>
+			<table id="tabelID"class="table">
 			<thead>
 			<tr>
 				<th>Дете</th>
@@ -35,8 +36,9 @@
 				<% end %>
 			</tbody>
 			</table>
-
-			<a href="/applications/new">Добавяне на кандидатура</a>
+			<form action="/applications/new" class="link">
+				<input type="submit"value="Добавяне на кандидатура"/>
+			</form>
 		</div>
 	</body>
 </html>

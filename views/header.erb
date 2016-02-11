@@ -1,18 +1,18 @@
 <div id="header">
 	<% if session[:id] == nil %>
-	  <form class="button" action="/">
+	  <form class="button_index" action="/">
       <input type="submit" value="Начало">
     </form>
 
-    <form class="button" action="/rules">
+    <form class="button_index" action="/rules">
       <input type="submit" value="Ръководство">
     </form>
 
-    <form class="button" action="/place">
+    <form class="button_index" action="/place">
       <input type="submit" value="Класиране">
     </form>
 
-    <form class="button" action="/login">
+    <form class="button_index" action="/login">
       <input type="submit" value="Вход">
     </form>
 	<% else %>
@@ -28,7 +28,7 @@
       <input type="submit" value="Кандидатстване">
     </form>
 
-    <form class="button" action="/parents_children">
+    <form class="button" action="/children">
       <input type="submit" value="Деца">
     </form>
 
@@ -42,12 +42,13 @@
 
     <form class="button" action="/logout">
       <input type="submit" value="Изход">
-    </form>
+    </form></br>
 	  <% end
 	%>
+</div>
   <% if session[:flash] %>
-  </br>
-  <p class="notice"><%= session[:flash] %></p>
+  <div class="notice">
+    <h1><%= session[:flash] %></h1>
+  </div>
   <% session[:flash] = nil %>
   <% end %>
-</div>

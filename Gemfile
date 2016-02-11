@@ -8,7 +8,11 @@ gem "sinatra-redirect-with-flash"
 gem "rake"
 
 # tests
-gem "rack-test"
+group :tests do
+  gem "minitest"
+  gem "rack-test"
+  gem "rspec"
+end
 
 # password encryption
 gem "bcrypt"

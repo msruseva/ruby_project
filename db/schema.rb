@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209091905) do
+ActiveRecord::Schema.define(version: 20160211084852) do
 
   create_table "applications", force: :cascade do |t|
     t.integer  "child_id"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 20160209091905) do
     t.integer  "num"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "points"
+    t.integer  "num_classifing"
+    t.boolean  "classifing"
   end
 
   add_index "applications", ["child_id"], name: "index_applications_on_child_id"

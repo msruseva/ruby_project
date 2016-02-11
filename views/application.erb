@@ -2,7 +2,6 @@
 <head>
 	<title></title>
 	<link href="/style.css" rel="stylesheet" type="text/css" />
-	<link href="/apply.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		window.schools = <%= School.by_district.to_json %>;
 		function district_change(district_id) {
@@ -27,7 +26,7 @@
 			
 			<%= erb :header %>
 
-			<p><label class="title">Форма за създаване на кандидатура</label></p>
+			<h1><label class="form_title">Форма за създаване на кандидатура</label></h1>
 
 			<% if @application.errors.any? %>
 				<ul class="error">
@@ -37,7 +36,7 @@
 				</ul>
 			<% end %>
 
-			<div id="contant">
+			<div class="content">
 				<form action="/applications" method="POST">
 					<p>
 					<label class="option">Дете:</label>
@@ -63,6 +62,15 @@
 							<option></option>
 				      <% School.where(district_id: @application.school.try(:district_id)).each do |school| %>
 							  <option value= '<%= school.id %>' <%= @application.school_id == school.id ? 'selected' : '' %>><%= school.name %></option>
+							<% end %>
+						</select>
+					</p>
+
+					<p>
+					<label class="option">Училището е жалние №:</label>
+						<select name="application[num]">
+					      	<% 1.upto(5) do |num| %>
+								<option value= '<%= num %>'><%= num %></option>
 							<% end %>
 						</select>
 					</p>

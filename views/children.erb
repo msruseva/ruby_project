@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title></title>
+	<link href="/table.css" rel="stylesheet" type="text/css" />
+	<link href="/style.css" rel="stylesheet" type="text/css" />
+</head>
+	<body>
+		
+		<div id="container">
+			
+			<%= erb :header %>
+
+			<table class="table">
+			<thead>
+			<tr>
+				<th>ЕГН</th>
+				<th>Име</th>
+				<th>Презиме</th>
+				<th>Фамилия</th>
+				<th>&nbsp;</th>
+			</tr>
+			</thead>
+			<tbody>
+				<% @children.each do |child| %>
+				<tr>
+					<td><%= child.egn %></td>
+					<td><%= child.first_name %></td>
+					<td><%= child.second_name %></td>
+					<td><%= child.last_name %></td>
+					<td>
+						<form action="/child/<%= child.id %>" method="POST">
+							<input type="hidden" name="_method" value="delete">
+	    					<input type="submit" value="Изтрий">
+						</form>
+					</td>
+					<td>
+						<form action="/child/<%= child.id %>" method="GET" >
+	    					<input type="submit" value="Редактирай">
+						</form>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+			</table>
+			<form action="/child/new" class="link">
+				<input type="submit" value="Добавяне на дете"/>
+			</form>
+		</div>
+	</body>
+</html>

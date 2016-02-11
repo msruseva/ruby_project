@@ -10,18 +10,108 @@
 	width: 100%
 }
 
-#content_left{
-	float: left;
-	width: 50%;
+#content{
 	height: 100%;
+	padding-top:50px;
+	padding-left:100px;
 }
 
-#content_right{
+#login_left{
 	float: right;
 	width: 50%;
-	height: 100%;
+	margin-right: 7%
 }
+
+#login_right{
+	color: #FF2151;
+	font-weight: bold;
+	float: right;
+	width: 50%;
+	margin-right: 15%;
+}
+
+.content{
+	float: right;
+	margin-right: 33%
+}
+
+.content_child{
+	margin-left: 5%
+}
+
 .button{
 	float: left;
-	margin-left: 70px;
+	margin-left: 50px;
+}
+
+.button_index{
+	float: left;
+	margin-left: 150px
+}
+.notice {
+	text-align: center;
+	text-shadow: 2px 2px #FF7729;
+	color: #FFAD29;
+}
+
+.big_title{
+	text-shadow: 2px 2px #FF7729;
+	margin-left: 31%;
+	color:#FF2151;
+}
+.title {
+	text-shadow: 2px 2px #FF7729;
+	margin-left: 35%;
+	color: #FFAD29;
+}
+
+.title_ {
+	text-shadow: 2px 2px #FF7729;
+	text-align: center;
+	color: #FFAD29;
+}
+
+.form_title{
+	text-shadow: 2px 2px #FF7729;
+	margin-left: 25%;
+	color: #FFAD29;
+}
+.subtitle{
+	color: #FF7729;
+	text-shadow: 1px 1px #FF7729;
+	text-align: center;
+}
+
+.names{
+	color: black;
+	font-weight: bolder
+}
+
+.field {
+	color: #FF2151;
+	width: 130px;
+	float: left;
+	font-weight: bold;
+}
+
+.option{
+	color: #FF2151;
+	width: 250px;
+	float: left;
+	font-weight: bold;
+}
+
+.email {
+	color: #FF2151;
+	font-weight: bold;
+	text-align: center;
+	margin-right: 20px;
+}
+
+.footer{
+	margin-top: 10px;
+	margin-left: 31%;
+}
+label {
+	font-weight: bold
 }

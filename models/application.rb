@@ -4,8 +4,5 @@ class Application < ActiveRecord::Base
 
   validates :child, :school, :num, presence: true
 
-  before_validation do
-    return if self.num.present?
-    self.num = child.applications.maximum(:num).to_i + 1 if child.present?
-  end
+
 end

@@ -6,10 +6,10 @@
 	<body>
 		<%= erb :header %>
 		<form action="/children" method="POST">
-		<div class="content_left">
-			<p>
-				<label class="subtitle">Данни за детето</label>
-			</p>
+		<div class="content_child">
+			<h1>
+				<label class="title">Данни за детето</label>
+			</h1>
 			<p>
 				<label class="names">Дете 1:</label>
 			</p>
@@ -31,7 +31,7 @@
 			</p>
 
 			<p>
-				<label class="option">Район на местоживеене:</label>
+				<label>Район на местоживеене:</label>
 					<select name="child[district_id]">
 							<option selected></option>
 						  <% District.order(:name).each do |district| %>
@@ -39,23 +39,23 @@
 							<% end %>
 					</select>
 			</p>
-			<p class="group_option" required>
-				<label>Има ли удостоверение за завършена подготвителна група</label></br>
+			<p>
+				<label>Има ли удостоверение за завършена подготвителна група: </label>
 					Да:<input type="radio" name="child[group]" value="<%= @child.group%>">
 					Не:<input type="radio" name="child[group]" value="<%= @child.group%>">
 			</p>
-			<p class="without_parent_option" required>
-				<label>Сирак</label></br>
+			<p>
+				<label>Сирак: </label>
 					Да:<input type="radio" name="child[orphan]" value="<%= @child.orphan%>">
 					Не:<input type="radio" name="child[orphan]" value="<%= @child.orphan%>">
 			</p>
 			<p>
-				<label>Полусирак</label></br>
+				<label>Полусирак: </label>
 					Да:<input type="radio" name="child[half_orphan]" value="<%= @child.half_orphan%>">
 					Не:<input type="radio" name="child[half_orphan]" value="<%= @child.half_orphan%>">
 			</p>
-			<p class="education_system_option" required>
-				<label>Работи родител в системата на столичното образование:</label></br>
+			<p>
+				<label>Работи родител в системата на столичното образование: </label>
 					Да:<input type="radio" name="child[parent_in_system]" value="<%= @child.parent_in_system%>">
 					Не:<input type="radio" name="child[parent_in_system]" value="<%= @child.parent_in_system%>">
 			</p>

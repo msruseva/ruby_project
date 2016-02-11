@@ -1,0 +1,46 @@
+#container{
+	width: 90%;
+	height: 100%;
+	margin: 0 auto;
+	font-family: Arial !important;
+}
+
+#header{
+	float: right;
+	width: 100%;
+	margin-bottom: 30px
+}
+
+.button{
+	float: left;
+	margin-left: 50px;
+}
+
+.table {
+	margin-top: 80px;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 25px 25px 5px #1Ab58A;
+    /*box-shadow: 20px 20px 50px 20px #1Ab58A*/
+}
+
+th, td {
+    text-align: left;
+    padding: 7px;
+}
+
+th {
+	color: #1Ab58A;
+	font-style: bold;
+	font-size: large
+}
+
+tr:nth-child(even){
+	background-color: #f2f2f2
+}
+
+.link {
+	margin-top: 40px;
+	text-align: right;
+}
