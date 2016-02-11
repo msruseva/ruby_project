@@ -1,19 +1,19 @@
 class SchoolClassification
 
-  attr_accessor :possition
+  attr_accessor :position
 
   def initialize(school_id)
     @school_id = school_id
-    @possition = 1
+    @position = 1
   end
 
   def classifing
-    Application.where(school_id: school_id).order(:points).each do |app|
+    Application.where(school_id: @school_id).order("points DESC").each do |app|
       app.classifing = true
-      app.num_classification = @possition
+      app.num_classifing = @position
       app.save
-      @possition += 1
-      break if @possition >= School::PLACES
+      @position += 1
+      break if @position > School::PLACES
     end
   end
 end

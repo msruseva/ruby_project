@@ -1,7 +1,6 @@
 class Parents < ActiveRecord::Migration
   def self.up
     create_table :parents do |t|
-      t.integer :user_id
       t.integer :mother_id
       t.string :mother_first_name
       t.string :mother_second_name

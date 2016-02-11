@@ -12,4 +12,8 @@ class School < ActiveRecord::Base
     end
     result
   end
+
+  def classified
+    applications.where(classifing: true).order(:num_classifing)
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211084852) do
+ActiveRecord::Schema.define(version: 20160211134749) do
 
   create_table "applications", force: :cascade do |t|
     t.integer  "child_id"
@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(version: 20160211084852) do
     t.string  "first_name"
     t.string  "second_name"
     t.string  "last_name"
-    t.string  "group"
-    t.string  "orphan"
-    t.string  "half_orphan"
-    t.string  "parent_in_system"
+    t.boolean "group"
+    t.boolean "orphan"
+    t.boolean "half_orphan"
+    t.boolean "parent_in_system"
     t.integer "parent_id"
     t.integer "district_id"
     t.integer "user_id"

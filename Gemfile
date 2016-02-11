@@ -7,9 +7,8 @@ gem "sinatra-flash"
 gem "sinatra-redirect-with-flash"
 gem "rake"
 
-# tests
-group :tests do
-  gem "minitest"
+# test
+group :test do
   gem "rack-test"
   gem "rspec"
 end

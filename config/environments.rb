@@ -21,3 +21,12 @@ configure :development do
     }
   }
 end
+
+configure :test do
+  ActiveRecord::Base.establish_connection(
+    adapter: 'sqlite3',
+    database: 'db/test.sqlite3',
+    pool: '5',
+    timeout: '5000'
+  )
+end

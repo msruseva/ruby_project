@@ -1,5 +1,6 @@
 class Parent < ActiveRecord::Base
   belongs_to :user
+  belongs_to :district
   has_many :children
 
   validates :mother_egn, :mother_first_name, :mother_second_name,
