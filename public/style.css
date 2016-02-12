@@ -59,10 +59,15 @@
 	margin-left: 31%;
 	color:#FF2151;
 }
+
 .title {
-	text-shadow: 2px 2px #FF7729;
 	margin-left: 35%;
 	color: #FFAD29;
+	font-weight: normal;
+	font-family: 'Ultra', sans-serif;
+	line-height: 42px;
+	text-transform: uppercase;
+	text-shadow: 0 2px white, 0 3px #FF7729;
 }
 
 .title_ {
@@ -112,6 +117,11 @@
 	margin-top: 10px;
 	margin-left: 31%;
 }
+
 label {
 	font-weight: bold
+}
+
+li{
+	color: #FF2248
 }

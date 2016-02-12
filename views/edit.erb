@@ -1,10 +1,11 @@
 <html>
 <head>
-	<title></title>
+	<title>Промени дете</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 	<body>
 		<form action="/child/<%= @child.id%>"method="POST">	
-			<input type="hidden" name="_method" value="put">
+			<div id="login_right">
 			<p>
 				<label class="field">ЕГН:</label>
 				<input type="tel" name="child[egn]" value="<%= @child.egn %>" required/>
@@ -21,8 +22,11 @@
 				<label class="field">Фамилия:</label>
 					<input type="text" name="child[last_name]" value="<%= @child.last_name %>" required/>
 			</p>
+			</div>
+			<div style="margin-left:45%">
 			<input type="hidden" name="_method" value="put">
 			<input type="submit" value="Редактирай">
+			</div>
 		</form>
 	</body>
 </html>
