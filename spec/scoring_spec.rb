@@ -5,14 +5,15 @@ describe "Scoring" do
     district = District.create!(name: 'test')
     @app = Application.new(
       child: Child.new(
-          district: district,
           parent: Parent.new(
               district: district
-            )
+            ),
+          district: district
+
         ),
       school: School.new(
           district: district
-        )
+        ),
     )
   end
 
@@ -53,7 +54,7 @@ describe "Scoring" do
   context "group" do
     it "returns zero if the child doesn't have certificate" do
       scoring = Scoring.new(@app)
-      @app.child.group = false
+      @app.child.group = nil
       expect(scoring.group).to eq 0
     end
 
@@ -64,38 +65,26 @@ describe "Scoring" do
     end
   end
 
-  context "orphan" do
-    it "returns zero if the child isn't a orphan" do
+  context "orphan_or_half_orphan" do
+    it "returns zero if the child isn't a orphan or half_orphan" do
       scoring = Scoring.new(@app)
-      @app.child.orphan = false
-      expect(scoring.orphan).to eq 0
+      @app.child.orphan = nil
+      @app.child.half_orphan = nil
+      expect(scoring.orphan_or_half_orphan).to eq 0
     end
 
-    it "returns one if the child is a orphan" do
+    it "returns one if the child is a orphan or half_orphan" do
       scoring = Scoring.new(@app)
       @app.child.orphan = true
-      expect(scoring.orphan).to eq 1
-    end
-  end
-
-  context "half_orphan" do
-    it "returns zero if the child isn't a half_orphan" do
-      scoring = Scoring.new(@app)
-      @app.child.half_orphan = false
-      expect(scoring.half_orphan).to eq 0
-    end
-
-    it "returns one if the child is a half_orphan" do
-      scoring = Scoring.new(@app)
       @app.child.half_orphan = true
-      expect(scoring.half_orphan).to eq 1
+      expect(scoring.orphan_or_half_orphan).to eq 1
     end
   end
 
   context "parent_in_system" do
     it "returns zero if the child doesn't have a parent that works in the education system" do
       scoring = Scoring.new(@app)
-      @app.child.parent_in_system = false
+      @app.child.parent_in_system = nil
       expect(scoring.parent_in_system).to eq 0
     end
 
@@ -109,10 +98,12 @@ describe "Scoring" do
   context "score" do
     it "returns true if the points from all fields are update in the database" do
       scoring = Scoring.new(@app)
+      @app.child.district = District.new
+      @app.child.parent.district = District.new
       @app.num = 2
       @app.child.group = true
       scoring.score
-      expect(@app.reload.points).to eq 9
+      expect(@app.reload.points).to eq 5
     end
   end
 end

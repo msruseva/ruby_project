@@ -32,7 +32,6 @@ class Scoring
   end
 
   def group
-    p "#{@app.child.group}"
     @app.child.group ? 1 : 0
   end
 
