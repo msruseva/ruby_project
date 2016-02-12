@@ -12,11 +12,13 @@
 			<form action="/parents" method="POST">
 				<div id="content">
 
-					<h1>
-						<label class="big_title">Форма за кандидатстване</label>
-					</h1>
+					<div class="title_">
+						<h1><label>Форма за кандидатстване</label></h1>
+					</div>
 					
-					<h1><label class="title">Данни за родителите</label></h1>
+					<div class="subtitle">
+						<h1><label>Данни за родителите</label></h1>
+					</div>
 					<p>
 						<label class="names">Родител 1:</label>
 					</p>
@@ -37,7 +39,7 @@
 							<input type="text" name="parent[mother_last_name]" value="<%= @parent.mother_last_name %>" required/>
 					</p>
 					<p>
-						<label class="option">Родител 2:</label>
+						<label class="names">Родител 2:</label>
 					</p>
 					<p>
 						<label class="field">ЕГН:</label>

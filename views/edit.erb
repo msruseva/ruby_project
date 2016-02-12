@@ -4,7 +4,8 @@
 	<link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 	<body>
-		<form action="/child/<%= @child.id%>"method="POST">	
+		<%= erb :header %>
+		<form action="/child/<%= @child.id%>"method="POST">
 			<div id="login_right">
 			<p>
 				<label class="field">ЕГН:</label>
