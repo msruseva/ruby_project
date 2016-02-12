@@ -43,9 +43,9 @@ describe "Scoring" do
       expect(scoring.district_living).to eq 0
     end
 
-    it "returns one if district of the child is the same as district of the school" do
+    it "returns three if district of the child is the same as district of the school" do
       scoring = Scoring.new(@app)
-      expect(scoring.district_living).to eq 1
+      expect(scoring.district_living).to eq 3
     end
 
   end
@@ -112,7 +112,7 @@ describe "Scoring" do
       @app.num = 2
       @app.child.group = true
       scoring.score
-      expect(@app.reload.points).to eq 7
+      expect(@app.reload.points).to eq 9
     end
   end
 end

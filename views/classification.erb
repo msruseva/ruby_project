@@ -1,8 +1,67 @@
 <html>
 <head>
-	<title></title>
+	<title>Класиране</title>
+	<link href="/table_classification.css" rel="stylesheet" type="text/css" />
+	<link href="/style.css" rel="stylesheet" type="text/css" />
 </head>
 	<body>
-		<h1>Крайно класиране</h1>
+		<%= erb :header %>
+		<div id="content_">
+			<div class="title">
+				<h1>Крайно класиране</h1>
+			</div>
+
+			<h1>ПРИЕТИ</h1>
+			<table class="table">
+			<thead>
+			<tr>
+				<th>Номер</th>
+				<th>Име</th>
+				<th>Презиме</th>
+				<th>Фамилия</th>
+				<th>Училище</th>
+				<th>Точки</th>
+				<th>&nbsp;</th>
+			</tr>
+			</thead>
+			<tbody>
+				<% @applications_confirmed.each do |app| %>
+				<tr>
+					<td><%= app.num_classifing %></td>
+					<td><%= app.child.first_name %></td>
+					<td><%= app.child.second_name %></td>
+					<td><%= app.child.last_name %></td>
+					<td><%= app.school.name %></td>
+					<td><%= app.points %></td>
+				</tr>
+				<% end %>
+			</tbody>
+			</table>
+
+			<h1>ТЪЖНИ</h1>
+			<table class="table">
+			<thead>
+			<tr>
+				<th>Име</th>
+				<th>Презиме</th>
+				<th>Фамилия</th>
+				<th>Училище</th>
+				<th>Точки</th>
+				<th>&nbsp;</th>
+			</tr>
+			</thead>
+			<tbody>
+				<% @applications_rejected.each do |app| %>
+				<tr>
+					<td><%= app.child.first_name %></td>
+					<td><%= app.child.second_name %></td>
+					<td><%= app.child.last_name %></td>
+					<td><%= app.school.name %></td>
+					<td><%= app.points %></td>
+				</tr>
+				<% end %>
+			</tbody>
+			</table>
+		</div>
 	</body>
 </html>

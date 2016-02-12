@@ -1,12 +1,12 @@
 class Classification
 
   def self.run
+    Application.update_all(points: nil, classifing: false, num_classifing: nil)
     Application.where(points: nil).each do |app|
       Scoring.new(app).score
     end
-    Application.update_all(classifing: false, num_classifing: nil)
-    Application.select(:shool_id).distinct.each do |school_id|
-      SchoolClassification.new(school_id).classifing
+    Application.all.each do |app|
+      SchoolClassification.new(app[:school_id]).classifing
     end
   end
 

@@ -2,7 +2,7 @@ class School < ActiveRecord::Base
   belongs_to :district
   has_many :applications
 
-  PLACES = 130
+  PLACES = 3
 
   def self.by_district
     result = {}

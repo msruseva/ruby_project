@@ -6,7 +6,7 @@
 	<body>
 		<%= erb :header %>
 		<form action="/children" method="POST">
-		<div class="content_child">
+		<div class="content_">
 			<h1>
 				<label class="title">Данни за детето</label>
 			</h1>
@@ -32,7 +32,7 @@
 
 			<p>
 				<label>Район на местоживеене:</label>
-					<select name="child[district_id]">
+					<select name="child[district_id]" required>
 							<option selected></option>
 						  <% District.order(:name).each do |district| %>
 								<option value= '<%= district.id %>' <%= @child.district_id == district.id ? 'selected' : '' %>> <%= district.name %></option>
@@ -41,23 +41,23 @@
 			</p>
 			<p>
 				<label>Има ли удостоверение за завършена подготвителна група: </label>
-					Да:<input type="radio" name="child[group]" value="<%= @child.group%>">
-					Не:<input type="radio" name="child[group]" value="<%= @child.group%>">
+					Да:<input type="radio" name="child[group]" value="true">
+					Не:<input type="radio" name="child[group]" value="false">
 			</p>
 			<p>
 				<label>Сирак: </label>
-					Да:<input type="radio" name="child[orphan]" value="<%= @child.orphan%>">
-					Не:<input type="radio" name="child[orphan]" value="<%= @child.orphan%>">
+					Да:<input type="radio" name="child[orphan]" value="true">
+					Не:<input type="radio" name="child[orphan]" value="false">
 			</p>
 			<p>
 				<label>Полусирак: </label>
-					Да:<input type="radio" name="child[half_orphan]" value="<%= @child.half_orphan%>">
-					Не:<input type="radio" name="child[half_orphan]" value="<%= @child.half_orphan%>">
+					Да:<input type="radio" name="child[half_orphan]" value="true">
+					Не:<input type="radio" name="child[half_orphan]" value="false">
 			</p>
 			<p>
 				<label>Работи родител в системата на столичното образование: </label>
-					Да:<input type="radio" name="child[parent_in_system]" value="<%= @child.parent_in_system%>">
-					Не:<input type="radio" name="child[parent_in_system]" value="<%= @child.parent_in_system%>">
+					Да:<input type="radio" name="child[parent_in_system]" value="true">
+					Не:<input type="radio" name="child[parent_in_system]" value="false">
 			</p>
 
 			<input type="submit" value="Запиши"/>

@@ -2,6 +2,7 @@ require File.expand_path '../spec_helper.rb', __FILE__
 
 describe "SchoolClassification" do
   before do
+
     @school = School.create!(
       district: District.new(name: 'Gorna banya'),
       name: '22ro'
@@ -57,14 +58,32 @@ describe "SchoolClassification" do
   end
 
   context "classifing" do
-    it "return true if child was classified in school" do
+    it "returns true if child was classified in school" do
       School::PLACES = 2
       school_classified = SchoolClassification.new(@school.id)
       school_classified.classifing
       expect(@app1.reload.classifing).to be true
-      expect(@app2.reload.classifing).to be true
+    end
+
+    it "returns nil if child wasn't classified" do
+      School::PLACES = 2
+      school_classified = SchoolClassification.new(@school.id)
+      school_classified.classifing
       expect(@app3.reload.classifing).to be nil
+    end
+
+    it "returns one if child was classified in his first wish" do
+      School::PLACES = 2
+      school_classified = SchoolClassification.new(@school.id)
+      school_classified.classifing
+      @app1.reload.classifing = true
       expect(@app1.num_classifing).to eq 1
+    end
+
+    it "returns the places for one school" do
+      School::PLACES = 2
+      school_classified = SchoolClassification.new(@school.id)
+      school_classified.classifing
       expect(@school.classified.size).to eq 2
     end
   end

@@ -180,3 +180,10 @@ delete '/child/:id' do
   @child.destroy
   redirect '/children'
 end
+
+get '/classification' do
+  Classification.run
+  @applications_confirmed = Application.includes(:child, :school).where(applications: {classifing: true} ).order("applications.school_id, applications.num_classifing")
+  @applications_rejected = Application.includes(:child, :school).where(applications: {classifing: false} ).order("applications.school_id, applications.num_classifing")
+  erb :classification
+end

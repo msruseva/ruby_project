@@ -21,34 +21,31 @@ class Scoring
     district_child = @app.child.district.id
     district_school = @app.school.district.id
 
-    district_child == district_school ? 1 : 0
+    district_child == district_school ? 3 : 0
   end
 
   def parent_district_work
     district_parent = @app.child.parent.district.id
     district_school = @app.school.district.id
 
-    district_parent == district_school ? 1 : 0
+    district_parent == district_school ? 2 : 0
   end
 
   def group
-    @app.child.group == "t" ? 1 : 0
+    p "#{@app.child.group}"
+    @app.child.group ? 1 : 0
   end
 
-  def orphan
-    @app.child.orphan == "t" ? 1 : 0
-  end
-
-  def half_orphan
-    @app.child.half_orphan == "t" ? 1 : 0
+  def orphan_or_half_orphan
+    (@app.child.orphan or @app.child.half_orphan) ? 1 : 0
   end
 
   def parent_in_system
-    @app.child.parent_in_system == "t" ? 1 : 0
+    @app.child.parent_in_system ? 1 : 0
   end
 
   def score
-    @app.points = apply_number + district_living + parent_district_work + group + orphan + half_orphan + parent_in_system
+    @app.points = apply_number + district_living + parent_district_work + group + orphan_or_half_orphan + parent_in_system
     @app.save
   end
 end
