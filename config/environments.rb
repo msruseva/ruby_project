@@ -14,8 +14,8 @@ configure :development do
       :address              => 'smtp.gmail.com',
       :port                 => '587',
       :enable_starttls_auto => true,
-      :user_name            => 'msruseva@gmail.com',
-      :password             => 'belieflove',
+      :user_name            => 'youremail@example.com',
+      :password             => 'yourpassword',
       :authentication       => :plain,
       :domain               => 'localhost.localdomain'
     }

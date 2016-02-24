@@ -13,9 +13,9 @@
 			<thead>
 			<tr>
 				<th>Дете</th>
-				<th>Дата</th>
 				<th>Училище</th>
 				<th>Пореден номер</th>
+				<th>Дата</th>
 				<th>&nbsp;</th>
 			</tr>
 			</thead>
@@ -23,9 +23,9 @@
 				<% @applications.each do |app| %>
 				<tr>
 					<td><%= app.child.to_s %></td>
-					<td><%= app.created_at %></td>
 					<td><%= app.school.name %></td>
 					<td><%= app.num %></td>
+					<td><%= app.created_at %></td>
 					<td>
 						<form action="/application/<%= app.id %>" method="POST">
 							<input type="hidden" name="_method" value="delete">

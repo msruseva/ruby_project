@@ -42,9 +42,10 @@
 	  <% end
 	%>
 </div>
-  <% if session[:flash] %>
+
+<% if session[:flash] %>
   <div class="notice">
     <h1><%= session[:flash] %></h1>
   </div>
   <% session[:flash] = nil %>
-  <% end %>
+<% end %>

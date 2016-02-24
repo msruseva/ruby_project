@@ -53,7 +53,8 @@ post '/forgotten_password' do
     :subject => "Нова парола",
     :body => "Новата ви парола е: #{random_password}."
   )
-  "Вашата нова парола беше изпратена на подадената от вас Е-поща."
+  session[:flash] = "Вашата нова парола беше изпратена на подадената от вас Е-поща."
+  redirect '/login'
 end
 
 get '/logout' do
